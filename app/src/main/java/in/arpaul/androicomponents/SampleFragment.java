@@ -8,32 +8,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import in.arpaul.androicomponents.livedata.SampleLiveData;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SampleFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SampleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SampleFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
 
-    private String mParam1;
+    private String data;
+    private TextView tvFragment;
 
     private OnFragmentInteractionListener mListener;
 
     public SampleFragment() {
     }
 
-    public static SampleFragment newInstance(String param1, String param2) {
+    public static SampleFragment newInstance(String data) {
         SampleFragment fragment = new SampleFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putString("DATA", data);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,15 +36,19 @@ public class SampleFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            data = getArguments().getString("DATA");
         }
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SampleLiveData.get("Data").observe(this, data -> {
+        SampleLiveData.get(data).observe(this, data -> {
             // Update the UI.
+            if(tvFragment != null)
+                tvFragment.setText(data);
+            else
+                Toast.makeText(getActivity(), "Textview null", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -58,7 +56,10 @@ public class SampleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sample, container, false);
+        View view = inflater.inflate(R.layout.fragment_sample, container, false);
+        tvFragment = view.findViewById(R.id.tvFragment);
+
+        return view;
     }
 
     public void onButtonPressed(Uri uri) {
