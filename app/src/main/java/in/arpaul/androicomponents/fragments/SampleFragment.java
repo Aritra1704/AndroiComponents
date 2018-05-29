@@ -1,4 +1,4 @@
-package in.arpaul.androicomponents;
+package in.arpaul.androicomponents.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import in.arpaul.androicomponents.R;
 import in.arpaul.androicomponents.livedata.SampleLiveData;
 
 

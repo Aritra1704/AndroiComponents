@@ -1,4 +1,4 @@
-package in.arpaul.androicomponents.livedata;
+package in.arpaul.androicomponents.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;

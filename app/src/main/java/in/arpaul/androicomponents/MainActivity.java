@@ -5,8 +5,11 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -18,8 +21,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import in.arpaul.androicomponents.livedata.NameViewModel;
+import in.arpaul.androicomponents.fragments.SampleFragment;
+import in.arpaul.androicomponents.viewmodel.NameViewModel;
 import in.arpaul.androicomponents.livedata.SampleLiveData;
+import in.arpaul.androicomponents.livedata.UserLiveData;
+import in.arpaul.androicomponents.viewmodel.UserVM;
+import in.arpaul.androicomponents.models.UserDO;
 
 public class MainActivity extends AppCompatActivity implements LifecycleOwner, SampleFragment.OnFragmentInteractionListener {
 
@@ -59,6 +66,14 @@ public class MainActivity extends AppCompatActivity implements LifecycleOwner, S
             public void onClick(View v) {
                 String anotherName = "John Doe";
                 mModel.getCurrentName().setValue(anotherName);
+
+                Toast.makeText(MainActivity.this, "Moving to next", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(MainActivity.this, NameActivity.class));
+                    }
+                }, 1000);
             }
         });
 
@@ -70,6 +85,25 @@ public class MainActivity extends AppCompatActivity implements LifecycleOwner, S
         showFragment("Aritra");
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         mModel.getCurrentName().observe(this, nameObserver);
+
+
+        UserDO objUser = new UserDO();
+        objUser.fName = "Aritra";
+        objUser.lName = "Pal";
+        LiveData<UserDO> userLiveData = new UserLiveData(objUser);
+        LiveData<String> userName = Transformations.map(userLiveData, user -> {
+            return user.fName + " " + user.lName;
+        });
+        userName.observe(this, user -> {
+            Toast.makeText(this, "User: " + user, Toast.LENGTH_SHORT).show();
+        });
+
+
+        //****************VIEWMODEL****************//
+        UserVM model = ViewModelProviders.of(this).get(UserVM.class);
+        model.getUsers().observe(this, users -> {
+            // Update UI.
+        });
     }
 
     private void showFragment(final String data){
