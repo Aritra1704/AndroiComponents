@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import in.arpaul.androicomponents.fragments.Detail1Fragment;
 import in.arpaul.androicomponents.fragments.DetailFragment;
 import in.arpaul.androicomponents.fragments.MasterFragment;
 import in.arpaul.androicomponents.fragments.SampleFragment;
@@ -19,6 +20,7 @@ public class NameActivity extends AppCompatActivity implements MasterFragment.On
 
         showMasterFrag("Aritra");
         showDetailFrag("Pal");
+        showDetail1Frag("Pal");
     }
 
     private void showMasterFrag(final String data){
@@ -50,6 +52,23 @@ public class NameActivity extends AppCompatActivity implements MasterFragment.On
 
 //        fragTransaction.add(R.id.flcontainer, tourFragment);
         fragTransaction.replace(R.id.flDetail, trackFragment);
+        fragTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragTransaction.addToBackStack(null);
+        fragTransaction.commit();
+    }
+
+    private void showDetail1Frag(final String data){
+
+        FragmentManager fragManager = getSupportFragmentManager();
+        FragmentTransaction fragTransaction = fragManager.beginTransaction();
+        Detail1Fragment trackFragment = new Detail1Fragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("DATA",data);
+        trackFragment.setArguments(bundle);
+
+//        fragTransaction.add(R.id.flcontainer, tourFragment);
+        fragTransaction.replace(R.id.flDetail1, trackFragment);
         fragTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragTransaction.addToBackStack(null);
         fragTransaction.commit();
