@@ -20,7 +20,7 @@ public class RxAndroidActivity1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rx_android);
+        setContentView(R.layout.activity_rx_android1);
 
         mColorListView = findViewById(R.id.color_list);
         mColorListView.setLayoutManager(new LinearLayoutManager(this));
