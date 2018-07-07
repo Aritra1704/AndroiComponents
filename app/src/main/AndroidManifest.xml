@@ -17,10 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".NameActivity" />
-        <activity android:name=".rxandroid.RxAndroidActivity1"></activity>
-        <activity android:name=".rxandroid.RxAndroidActivity2"></activity>
-        <activity android:name=".rxandroid.RxFirstActivity"></activity>
-        <activity android:name=".OnebyOneFragActivity"></activity>
+        <activity android:name=".rxandroid.RxAndroidActivity1" />
+        <activity android:name=".rxandroid.RxAndroidActivity2" />
+        <activity android:name=".rxandroid.RxFirstActivity" />
+        <activity android:name=".OnebyOneFragActivity" />
+        <activity
+            android:name=".WordActivity"
+            android:label="@string/title_activity_word"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".NewWordActivity"></activity>
     </application>
 
 </manifest>

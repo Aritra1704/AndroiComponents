@@ -51,10 +51,6 @@ public class FirstFragment extends Fragment {
             edtFname.setText(item.fName);
             edtLname.setText(item.lName);
         });
-//        SharedVM model = ViewModelProviders.of(getActivity()).get(SharedVM.class);
-//        model.getSelected().observe(this, item -> {
-//            tvDetail.setText(item.fName + " " + item.lName);
-//        });
     }
 
     private UserDO user;

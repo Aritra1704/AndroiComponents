@@ -90,6 +90,19 @@ public class MainActivity extends AppCompatActivity implements LifecycleOwner, S
             }
         });
 
+        ((Button) findViewById(R.id.btnTest2)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Moving to next", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(MainActivity.this, WordActivity.class));
+                    }
+                }, 1000);
+            }
+        });
+
         LiveData<String> mLiveData = new SampleLiveData("Aritra");
         mLiveData.observe(this, data -> {
             Toast.makeText(this, "Data: " + data, Toast.LENGTH_SHORT).show();
